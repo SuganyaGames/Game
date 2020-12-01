@@ -6,26 +6,70 @@ namespace Car1Game
 {
     class Program
     {
+        
+
         static void Main(string[] args)
         {
-            int LifeCount = 0;
+            int LifeCount = 5;
             int Point = 0;
             List<Car> Cars = new List<Car>();
-            var mainCar = MainCar();
+            Car mainCar = MainCar();
+
             while (LifeCount>0)
             {
                 Cars.Add(GetCarType());
                 while (Console.KeyAvailable)
                 {
                     ConsoleKeyInfo PressedKey = Console.ReadKey(true);
-                    KeyAvailable(PressedKey, mainCar);    
+                    KeyAvailable(PressedKey,mainCar);    
                 }
+                mainCar.Print();
                 Cars.ForEach(x => x.Print());
-                CarshCar(Cars,mainCar,LifeCount,Point);
+                Print_Life_Point(LifeCount,Point);
+                bool hitenemycar=HitEnemyCar(Cars, mainCar);
+                if (hitenemycar)
+                {
+                    CarType carType = CarType.Others;
+                    Car car = new Car(mainCar.X,mainCar.Y,carType);
+                    car.Print();
+                    LifeCount--;
+                    Cars = new List<Car>();
+                }
+                bool hitlifecar = HitLifeCar(Cars, mainCar);
+                if (hitlifecar)
+                {
+                    LifeCount++;
+                }
+                bool hitpointcar = HitPointCar(Cars, mainCar);
+                if (hitpointcar)
+                {
+
+                    Point = Point + 10;
+                    if (Point == 50)
+                    {
+                        LifeCount++;
+                        Point = 0;
+                    }
+                }
                 Cars.RemoveAll(x => x.Y >= mainCar.Y);
                 Cars.ForEach(x => x.Y++);
                 Thread.Sleep(300);
+                Console.Clear();
             }
+        }
+        static void Print_Life_Point(int LifeCount,int Point)
+        {
+            int X1 = 20;
+            int Y1= 5;
+            Console.SetCursorPosition(X1, Y1);
+            Console.ForegroundColor =ConsoleColor.DarkCyan;
+            Console.WriteLine($"LifeCount is: {LifeCount}");
+            int X2 = 20;
+            int Y2 = 7;
+            Console.SetCursorPosition(X2, Y2);
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
+            Console.WriteLine($"point is: {Point}");
+            Console.WriteLine();
         }
         static Car GetCarType()
         {
@@ -45,52 +89,56 @@ namespace Car1Game
             Car car = new Car(X,Y,Cartype);
             return car;
         }
-        static void KeyAvailable(ConsoleKeyInfo PressedKey, Car car)
+        static void KeyAvailable(ConsoleKeyInfo PressedKey,Car mainCar)
         {
             int X = 10;
             if (PressedKey.Key == ConsoleKey.LeftArrow)
             {
-                if (car.X <= 0)
+                if (mainCar.X > 0)
                 {
-                    car.X++;
+                    mainCar.X--;
                 }
             }
             if (PressedKey.Key == ConsoleKey.RightArrow)
             {
-                if (car.X <= X)
+                if (mainCar.X < X)
                 {
-                    car.X--;
+                    mainCar.X++;
                 }
             }
         }
-        static void CarshCar(List<Car> cars, Car mainCar,int LifeCount,int Point)
+        static bool HitLifeCar(List<Car> cars, Car mainCar)
         {
             foreach (var item in cars)
             {
-                if(item.X==mainCar.X && item.Y==mainCar.Y && item.Cartype == CarType.EnemyCar)
+                if (item.X == mainCar.X && item.Y == mainCar.Y && item.Cartype == CarType.LifeCar)
                 {
-                    int X = 20;
-                    int Y = 5;
-                    CarType carType = CarType.Others;
-                    Car car = new Car(X, Y, carType);
-                    LifeCount--;
-                    cars = new List<Car>();
-                    Console.Clear();
-                }
-                if(item.X==mainCar.X && item.Y==mainCar.Y && item.Cartype == CarType.LifeCar)
-                {
-                    LifeCount++;
-                }
-                if(item.X==mainCar.X && item.Y==mainCar.Y && item.Cartype == CarType.PointCar)
-                {
-                    Point = Point + 10;
-                    if (Point == 50)
-                    {
-                        LifeCount++;
-                        Point = 0;
-                    }
+                    return true;
                 }
             }
+            return false;
+        }
+        static bool HitPointCar(List<Car> cars, Car mainCar)
+        {
+            foreach (var item in cars)
+            {
+                if (item.X == mainCar.X && item.Y == mainCar.Y && item.Cartype == CarType.PointCar)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        static bool HitEnemyCar(List<Car> cars, Car mainCar)
+        {
+            foreach (var item in cars)
+            {
+                if (item.X == mainCar.X && item.Y == mainCar.Y && item.Cartype == CarType.EnemyCar)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
