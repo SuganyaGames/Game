@@ -18,6 +18,7 @@ namespace Tetris
             Print_Corner();
             while (true)
             {
+                Print_Point();
                 tetries.ForEach(x => x.Y += 1);
                 if (MainTetris.Any(x => x.Y ==2) || Point==100)
                 {
@@ -40,6 +41,11 @@ namespace Tetris
                 Thread.Sleep(150);
                 tetries.ForEach(x => x.Clear());
             }
+        }
+       static void Print_Point()
+        {
+            Console.SetCursorPosition(X + 5, Y / 2);
+            Console.WriteLine($"Point is: {Point}");
         }
         static void WinCheck(List<Tetris> MainTeries)
         {
