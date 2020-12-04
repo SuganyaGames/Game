@@ -8,17 +8,26 @@ namespace Test
     {
         static void Main(string[] args)
         {
-            var board = new List<Point>();
-            board.Add(new Point(2,15));
-            board.Add(new Point(2,16));
-            var tetris = new List<Point>();
-            tetris.Add(new Point(3, 15));
-            tetris.Add(new Point(3, 16));
-            // left
-            var tet = !tetris.Any(x => board.Any(y => y.X==x.X-1 && y.Y == x.Y));
-            var tet = tetris.All(x => !board.Any(y => y.X==x.X&&y.Y==x.Y));
+            var a = new Point(1,10);
+            var b = a;
+            a.Print();
+            b.Print();
+            b.X += 1;
+            a.Print();
+            b.Print();
 
-            Console.WriteLine(tet);//false
+            var c = 5;
+            var d = c;
+            Console.WriteLine(c+" "+d);
+            d++;
+            Console.WriteLine(c+" "+d);
+            var e = "su";
+            var f = e;
+            Console.WriteLine(e+" "+f);
+            f = f + "l";
+            Console.WriteLine(e+" "+f);
+            
+
         }
         public class Point
         {
@@ -29,6 +38,11 @@ namespace Test
                 this.X = x;
                 this.Y = y;
             }
+            public void Print()
+            {
+                Console.WriteLine(X + " " + Y);
+            }
         }
+        
     }
 }
