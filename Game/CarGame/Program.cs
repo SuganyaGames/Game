@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 
 namespace CarGame
@@ -43,9 +44,10 @@ namespace CarGame
                 cars.Add(car);
                 car1.Print();
                 cars.ForEach(x => x.Print());
-                foreach (var item in cars)
+                if (cars.Any(x => x.X == car1.X && x.Y == car1.Y))
                 {
-                    if (item.X == car1.X && item.Y == car1.Y && item.type == CarType.PointCar)
+                    var hitCar = cars.First(x => x.X == car1.X && x.Y == car1.Y);
+                    if (hitCar.type == CarType.PointCar)
                     {
                         point = point + 10;
                         if (point == 50)
@@ -54,14 +56,14 @@ namespace CarGame
                             point = 0;
                         }
                     }
-                    if (item.X == car1.X && item.Y == car1.Y && item.type == CarType.LifeCar)
+                    if (hitCar.type == CarType.LifeCar)
                     {
                         LifeCOunt++;
                     }
-                    if (item.X==car1.X && item.Y == car1.Y && item.type==CarType.EnemyCar)
+                    if (hitCar.type  == CarType.EnemyCar)
                     {
                         LifeCOunt--;
-                        Car car2 = new Car(CarType.Others, item.X, item.Y);
+                        Car car2 = new Car(CarType.Others, hitCar.X, hitCar.Y);
                         car2.Print();
                         if (LifeCOunt == 0)
                         {
@@ -73,11 +75,19 @@ namespace CarGame
                         }
                     }
                 }
+                
             cars.RemoveAll(x => x.Y >= car1.Y);
             foreach (var item in cars)
             {
                 item.Y++;
             }
+            PrintPoint(LifeCOunt, point);
+            Thread.Sleep(300);
+            Console.Clear();
+            }
+        }
+        static void PrintPoint(int LifeCOunt, int point)
+        {
             Console.SetCursorPosition(20, 10);
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine($"LifeCount:{LifeCOunt}");
@@ -85,9 +95,6 @@ namespace CarGame
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine($"Point:{point}");
 
-            Thread.Sleep(300);
-            Console.Clear();
-            }
         }
         static CarType GetCar()
         {

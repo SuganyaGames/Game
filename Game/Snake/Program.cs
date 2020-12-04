@@ -16,6 +16,8 @@ namespace Snake
             var sneaks = SnakePrint();
             sneaks.ForEach(x => x.Print());
             var snakeFood = FoodPoint();
+            var snakesDangerous = DangerousPoint();
+            snakesDangerous.ForEach(x => x.Print());
             snakeFood.Print();
             int Point = 50;
             int Time = 0;
@@ -45,8 +47,8 @@ namespace Snake
                     snakeFood = FoodPoint();
                     snakeFood.Print();
                 }
-                var snakesDangerous = DangerousPoint();
-                snakesDangerous.ForEach(x => x.Print());
+                
+                
                 if (Time > 50)
                 {
                     snakeFood.Clear();
@@ -72,33 +74,33 @@ namespace Snake
         }
         static Snake KeyAvailable(ConsoleKey Direction)
         {
-            var Head = snakes[snakes.Count - 1];
-            var Tail = new Snake(snakes[0].X, snakes[0].Y, SnakeTypes.Snake);
+            var head = snakes[snakes.Count - 1];
+            var newHead = new Snake(snakes[0].X, snakes[0].Y, SnakeTypes.Snake);
             if (Direction == ConsoleKey.LeftArrow)
             {
-                Tail.X = Head.X - 1;
-                Tail.Y = Head.Y;
+                newHead.X = head.X - 1;
+                newHead.Y = head.Y;
                 //Tail.X = Tail.X <= 0 ? Console.WindowWidth - 1 : Tail.X;
             }
             else if (Direction == ConsoleKey.RightArrow)
             {
-                Tail.X = Head.X + 1;
-                Tail.Y = Head.Y;
+                newHead.X = head.X + 1;
+                newHead.Y = head.Y;
                 //Tail.X = Tail.X >= Console.WindowWidth - 1 ? 0 : Tail.X;
             }
             else if (Direction == ConsoleKey.UpArrow)
             {
-                Tail.Y = Head.Y - 1;
-                Tail.X = Head.X;
+                newHead.Y = head.Y - 1;
+                newHead.X = head.X;
                 //Tail.Y = Tail.Y <= 0 ? Console.WindowHeight - 1 : Tail.Y;
             }
             else if (Direction == ConsoleKey.DownArrow)
             {
-                Tail.Y = Head.Y + 1;
-                Tail.X = Head.X;
+                newHead.Y = head.Y + 1;
+                newHead.X = head.X;
                 //Tail.Y = Tail.Y >= Console.WindowHeight - 1 ? 0 : Tail.Y;
             }
-            return Tail;
+            return newHead;
         }
         static List<Snake> DangerousPoint()
         {
