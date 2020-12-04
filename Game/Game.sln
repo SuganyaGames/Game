@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "Test\Test.csproj", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BingBang", "BingBang\BingBang.csproj", "{F3E799E1-26B8-47D9-9BBA-E4CD9616DD07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardGame", "CardGame\CardGame.csproj", "{566BC7B6-7824-4092-BB31-8D2F6CC85465}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TikTok", "TikTok\TikTok.csproj", "{30D0AC4A-6863-41D1-81B4-9DE615172537}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +61,14 @@ Global
 		{F3E799E1-26B8-47D9-9BBA-E4CD9616DD07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3E799E1-26B8-47D9-9BBA-E4CD9616DD07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3E799E1-26B8-47D9-9BBA-E4CD9616DD07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{566BC7B6-7824-4092-BB31-8D2F6CC85465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{566BC7B6-7824-4092-BB31-8D2F6CC85465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{566BC7B6-7824-4092-BB31-8D2F6CC85465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{566BC7B6-7824-4092-BB31-8D2F6CC85465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30D0AC4A-6863-41D1-81B4-9DE615172537}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30D0AC4A-6863-41D1-81B4-9DE615172537}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30D0AC4A-6863-41D1-81B4-9DE615172537}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30D0AC4A-6863-41D1-81B4-9DE615172537}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
